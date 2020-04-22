@@ -9,8 +9,6 @@ const auth = require('./middleware/auth');
 require('dotenv').config();
 require('./config/database');
 
-const port = process.env.PORT || 3000;
-
 const app = express();
 
 app.use(cors());
@@ -26,6 +24,4 @@ app.use('/users', users);
 app.use('/products', auth, products);
 app.use('/onlyreading', products);
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
-})
+app.listen(process.env.PORT || 3000, () => console.log(`Server running`));
