@@ -1,5 +1,4 @@
 const ProductModel = require('../models/Product');					
-const fs = require('fs');
 
 module.exports = {
 	getById: function(req, res, next) {
@@ -20,7 +19,22 @@ module.exports = {
 				next(err);
 			} else{
 				for (let product of response) {
-					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image});
+					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image, category: product.category, colors: product.colors });
+				}
+				res.json({products : response});
+			}
+		});
+	},
+
+	getByCategory: function(req, res, next) {
+		let productsList = [];
+
+		ProductModel.find({'id': req.body.id}, function(err, response){
+			if (err){
+				next(err);
+			} else{
+				for (let product of response) {
+					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image, category: product.category, colors: product.colors });
 				}
 				res.json({products : response});
 			}
@@ -28,7 +42,7 @@ module.exports = {
 	},
 
 	async updateById(req, res, next) {
-		ProductModel.findByIdAndUpdate(req.params.id,{name:req.body.name, description:req.body.description, image: req.body.image }, function(err, response){
+		ProductModel.findByIdAndUpdate(req.params.id,{name:req.body.name, description:req.body.description, image: req.body.image, category: req.body.category, colors: req.body.colors }, function(err, response){
 			if(err)
 				next(err);
 			else {
@@ -49,7 +63,7 @@ module.exports = {
 
 	async create(req, res, next) {
 
-		ProductModel.create({ name: req.body.name, description: req.body.description, image: req.body.image }, function (err, response) {
+		ProductModel.create({ name: req.body.name, description: req.body.description, image: req.body.image, category: req.body.category, colors: req.body.colors }, function (err, response) {
 			if (err) 
 				next(err);
 			else
