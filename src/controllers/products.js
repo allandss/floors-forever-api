@@ -36,8 +36,7 @@ module.exports = {
 				for (let product of response) {
 					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image, category: product.category, colors: product.colors });
 				}
-				console.log(productsList)
-				res.json({products : productsList});
+				res.json({products : response});
 			}
 		});
 	},
