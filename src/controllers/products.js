@@ -28,15 +28,16 @@ module.exports = {
 
 	getByCategory: function(req, res, next) {
 		let productsList = [];
-
-		ProductModel.find({'id': req.body.id}, function(err, response){
+		console.log(req.params.id);
+		ProductModel.find({'category': req.params.id}, function(err, response){
 			if (err){
 				next(err);
 			} else{
 				for (let product of response) {
 					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image, category: product.category, colors: product.colors });
 				}
-				res.json({products : response});
+				console.log(productsList)
+				res.json({products : productsList});
 			}
 		});
 	},
