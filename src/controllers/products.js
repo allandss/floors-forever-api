@@ -19,22 +19,22 @@ module.exports = {
 				next(err);
 			} else{
 				for (let product of response) {
-					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image, category: product.category, colors: product.colors });
+					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image, serie: product.serie, warranty: product.warranty });
 				}
 				res.json({products : response});
 			}
 		});
 	},
 
-	getByCategory: function(req, res, next) {
+	getBySerie: function(req, res, next) {
 		let productsList = [];
 		console.log(req.params.id);
-		ProductModel.find({'category': req.params.id}, function(err, response){
+		ProductModel.find({'serie': req.params.id}, function(err, response){
 			if (err){
 				next(err);
 			} else{
 				for (let product of response) {
-					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image, category: product.category, colors: product.colors });
+					productsList.push({id: product._id, name: product.name, description: product.description, image: product.image, serie: product.serie, warranty: product.warranty });
 				}
 				res.json({products : response});
 			}
@@ -42,7 +42,7 @@ module.exports = {
 	},
 
 	async updateById(req, res, next) {
-		ProductModel.findByIdAndUpdate(req.params.id,{name:req.body.name, description:req.body.description, image: req.body.image, category: req.body.category, colors: req.body.colors }, function(err, response){
+		ProductModel.findByIdAndUpdate(req.params.id,{name:req.body.name, description:req.body.description, image: req.body.image, serie: req.body.serie, warranty: req.body.warranty }, function(err, response){
 			if(err)
 				next(err);
 			else {
@@ -63,7 +63,7 @@ module.exports = {
 
 	async create(req, res, next) {
 
-		ProductModel.create({ name: req.body.name, description: req.body.description, image: req.body.image, category: req.body.category, colors: req.body.colors }, function (err, response) {
+		ProductModel.create({ name: req.body.name, description: req.body.description, image: req.body.image, serie: req.body.serie, warranty: req.body.warranty }, function (err, response) {
 			if (err) 
 				next(err);
 			else

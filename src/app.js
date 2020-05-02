@@ -2,6 +2,7 @@ const express = require('express')
 const users = require('./routes/users');
 const products = require('./routes/products');
 const categories = require('./routes/categories');
+const serie = require('./routes/serie');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({
 app.use('/users', users);
 app.use('/products', products);
 app.use('/categories', categories);
+app.use('/serie', serie);
 app.use('/onlyreading', products);
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server running`));
