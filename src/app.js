@@ -3,10 +3,11 @@ const users = require('./routes/users');
 const products = require('./routes/products');
 const categories = require('./routes/categories');
 const serie = require('./routes/serie');
+const file = require('./routes/file');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
 const auth = require('./middleware/auth');
+const path = require('path');
 
 require('dotenv').config();
 require('./config/database');
@@ -21,11 +22,13 @@ app.use(bodyParser.urlencoded({
   parameterLimit:50000
 }));
 
+
 // public route
 app.use('/users', users);
 app.use('/products', products);
 app.use('/categories', categories);
 app.use('/serie', serie);
-app.use('/onlyreading', products);
+app.use('/file', file);
+app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')));
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server running`));
