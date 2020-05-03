@@ -4,6 +4,8 @@ const products = require('./routes/products');
 const categories = require('./routes/categories');
 const serie = require('./routes/serie');
 const file = require('./routes/file');
+const contact = require('./routes/contact');
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const auth = require('./middleware/auth');
@@ -30,5 +32,6 @@ app.use('/categories', categories);
 app.use('/serie', serie);
 app.use('/file', file);
 app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')));
+app.use('/contact', contact);
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server running`));
