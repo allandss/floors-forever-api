@@ -5,6 +5,7 @@ const categories = require('./routes/categories');
 const serie = require('./routes/serie');
 const file = require('./routes/file');
 const contact = require('./routes/contact');
+const photo = require('./routes/photo');
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -33,5 +34,6 @@ app.use('/serie', serie);
 app.use('/file', file);
 app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')));
 app.use('/contact', contact);
+app.use('/photo', photo);
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server running`));
